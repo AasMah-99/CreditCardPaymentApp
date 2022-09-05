@@ -10,27 +10,19 @@ public class Account {
 	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
-  private long accountId;
+  private Long accountId;
 	
   private String accountName;
 	
-  private double balance;
+  private Double balance;
 
   private String accountType;
-  
-public Account(long accountId, String accountName, double balance, String accountType) {
-	super();
-	this.accountId = accountId;
-	this.accountName = accountName;
-	this.balance = balance;
-	this.accountType = accountType;
-}
 
-public long getAccountId() {
+public Long getAccountId() {
 	return accountId;
 }
 
-public void setAccountId(long accountId) {
+public void setAccountId(Long accountId) {
 	this.accountId = accountId;
 }
 
@@ -42,11 +34,11 @@ public void setAccountName(String accountName) {
 	this.accountName = accountName;
 }
 
-public double getBalance() {
+public Double getBalance() {
 	return balance;
 }
 
-public void setBalance(double balance) {
+public void setBalance(Double balance) {
 	this.balance = balance;
 }
 
@@ -58,6 +50,14 @@ public void setAccountType(String accountType) {
 	this.accountType = accountType;
 }
 
+public Account(Long accountId, String accountName, Double balance, String accountType) {
+	super();
+	this.accountId = accountId;
+	this.accountName = accountName;
+	this.balance = balance;
+	this.accountType = accountType;
+}
+
 @Override
 public String toString() {
 	return "Account [accountId=" + accountId + ", accountName=" + accountName + ", balance=" + balance
@@ -65,7 +65,6 @@ public String toString() {
 }
 
 public Account() {
-	
+	}
 }
-}
-
+  
