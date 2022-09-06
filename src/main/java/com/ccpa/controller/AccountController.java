@@ -22,13 +22,13 @@ import com.ccpa.model.Account;
 import com.ccpa.service.AccountService;
 
 @RestController 
-@RequestMapping("/Account")
+@RequestMapping("/account")
 public class AccountController {
 	
 	@Autowired
 	AccountService accountService;
 	
-	@PostMapping("/add")
+	@PostMapping("/addAccount")
 	 public ResponseEntity<Account> addAccount(@RequestBody Account account) throws AccountNotAddedException {
 	    return new ResponseEntity<>(accountService.addAccount(account), HttpStatus.OK);
 	  }
@@ -39,21 +39,18 @@ public class AccountController {
 	  }
 	
 	
-	@PutMapping("/updateAccount")
-	 public ResponseEntity<Account> updateNotes(@RequestBody Long id, Account account) throws AccountNotUpdatedException {
+	@PutMapping("/updateAccount/{id}")
+	 public ResponseEntity<Account> updateAccount(@RequestBody Account account, @PathVariable("id") Long id) throws AccountNotUpdatedException {
 	    return new ResponseEntity<>(accountService.updateAccount(id, account), HttpStatus.OK);
 	  }
 	
-	@GetMapping("/getaccountbyId/{accountId}")
-    public ResponseEntity<Account> getaccountbyId(@PathVariable Long id) throws AccountNotFoundException {
+	@GetMapping("/getAccountById/{id}")
+    public ResponseEntity<Account> getaccountbyId(@PathVariable("id") Long id) throws AccountNotFoundException {
 	  	return new ResponseEntity<>(accountService.getAccount(id),HttpStatus.FOUND);
 	  }
 	
-	@GetMapping("/getAllaccounts")
-	 public ResponseEntity<List<Account>> getAllaccounts(@PathVariable Long id) {
+	@GetMapping("/getAllAccounts")
+	 public ResponseEntity<List<Account>> getAllaccounts() {
 	  	return new ResponseEntity<>(accountService.getAllAccounts(),HttpStatus.FOUND);
 	  }
-	
-
-
 }
