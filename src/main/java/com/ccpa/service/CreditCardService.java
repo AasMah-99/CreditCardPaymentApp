@@ -18,6 +18,6 @@ public interface CreditCardService {
 
 	public CreditCard getCreditCard(Long cardId) throws CreditCardNotFoundException;
 
-	public List<CreditCard> getAllCreditCard();
+	public List<CreditCard> getAllCreditCards();
 
 }

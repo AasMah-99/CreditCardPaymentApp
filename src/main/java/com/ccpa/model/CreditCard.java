@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "creditCard")
 
@@ -17,6 +19,7 @@ public class CreditCard {
 	private String cardName;
 	private String cardType;
 	private String cardNumber;
+	@JsonFormat(pattern ="dd/MM/yyyy")
 	private LocalDate expiryDate;
 	private String bankName;
 

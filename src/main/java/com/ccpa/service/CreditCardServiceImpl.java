@@ -34,9 +34,10 @@ public class CreditCardServiceImpl implements CreditCardService {
 	@Override
 	public CreditCard removeCreditCard(Long cardId) throws CreditCardNotDeletedException {
 
-		creditCardRepository.deleteById(cardId);
 		if (creditCardRepository.existsById(cardId)) {
-			throw new CreditCardNotDeletedException("Error Deleting Credit Card");
+			creditCardRepository.deleteById(cardId);
+		}else {
+		throw new CreditCardNotDeletedException("Error Deleting Credit Card");
 		}
 		return null;
 
@@ -47,12 +48,19 @@ public class CreditCardServiceImpl implements CreditCardService {
 	public CreditCard updateCreditCard(Long cardId, CreditCard card) throws CreditCardNotUpdatedException {
 
 		if (creditCardRepository.existsById(cardId)) {
-			CreditCard creditcard = creditCardRepository.save(card);
-			if (creditcard != null) {
-				return null;
-			}
+			return creditCardRepository.findById(cardId).map(creditCard -> {
+				creditCard.setCardName(card.getCardName());
+				creditCard.setCardNumber(card.getCardNumber());
+				creditCard.setBankName(card.getBankName());
+				creditCard.setCardType(card.getCardType());
+				creditCard.setExpiryDate(card.getExpiryDate());
+				return creditCardRepository.save(creditCard);
+			}).orElseGet(() -> {
+				card.setId(cardId);
+				return creditCardRepository.save(card);
+			});
 		}
-		throw new CreditCardNotUpdatedException("error updating Credit Card");
+		throw new CreditCardNotUpdatedException("Could not Update Credit Card");
 	}
 
 	// Function to FIND credit card with "cardId" details with required Exceptions
@@ -70,7 +78,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
 	// Function to GET ALL credit cards from database
 	@Override
-	public List<CreditCard> getAllCreditCard() {
+	public List<CreditCard> getAllCreditCards() {
 
 		return creditCardRepository.findAll();
 	}
