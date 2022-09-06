@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.ccpa.model.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long>{
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 	@Query("From Customer a WHERE a.custId =:aCustid")
 	Customer getCustomerById(@Param("aCustid") Long custId);
 }
-

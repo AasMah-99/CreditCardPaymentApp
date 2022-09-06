@@ -15,7 +15,7 @@ public class Address {
 	private String city;
 	private String state;
 	private Integer pincode;
-	
+
 	public Address() {
 	}
 
@@ -82,7 +82,4 @@ public class Address {
 				+ state + ", pincode=" + pincode + "]";
 	}
 
-	
-
-	
 }

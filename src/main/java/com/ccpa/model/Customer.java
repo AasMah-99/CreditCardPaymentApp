@@ -106,5 +106,4 @@ public class Customer {
 				+ ", contactNo=" + contactNo + ", dob=" + dob + ", address=" + address + "]";
 	}
 
-	
 }

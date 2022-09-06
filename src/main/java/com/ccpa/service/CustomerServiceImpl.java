@@ -15,33 +15,34 @@ import com.ccpa.exception.CustomerNotUpdatedException;
 import com.ccpa.model.Customer;
 import com.ccpa.repository.CustomerRepository;
 
-
 @Service
 @Transactional
-public class CustomerServiceImpl implements CustomerService{
-	
+public class CustomerServiceImpl implements CustomerService {
+
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
+	// Function to ADD customer details with required Exceptions
 	@Override
 	public Customer addCustomer(Customer customer) throws CustomerNotAddedException {
 		return customerRepository.save(customer);
 	}
 
+	// Function to DELETE customer details with required Exceptions
 	@Override
 	public Customer removeCustomer(Long custId) throws CustomerNotDeletedException {
 		if (customerRepository.existsById(custId)) {
 			customerRepository.deleteById(custId);
-		}
-		else {
-		throw new CustomerNotDeletedException("Customer Id Not Found");
+		} else {
+			throw new CustomerNotDeletedException("Customer Id Not Found");
 		}
 		return null;
 	}
-	
+
+	// Function to UPDATE customer details with required Exceptions
 	@Override
 	public Customer updateCustomer(Long custId, Customer customer) throws CustomerNotUpdatedException {
-		if(customerRepository.existsById(custId)){
+		if (customerRepository.existsById(custId)) {
 			Customer customerFromDb = (customerRepository).getCustomerById(custId);
 			customerFromDb.setCustId(custId);
 			customerFromDb.setUserId(customer.getUserId());
@@ -50,27 +51,27 @@ public class CustomerServiceImpl implements CustomerService{
 			customerFromDb.setContactNo(customer.getContactNo());
 			customerFromDb.setDob(customer.getDob());
 			customerFromDb.setAddress(customer.getAddress());
-		    customerRepository.save(customerFromDb);
-			}
-		else {
+			customerRepository.save(customerFromDb);
+		} else {
 			throw new CustomerNotUpdatedException("Customer Id not Found for Updating");
 		}
 		return customer;
 	}
-	
+
+	// Function to GET customer details by custId with required Exceptions
 	@Override
 	public Customer getCustomer(Long custId) throws CustomerNotFoundException {
 		Optional<Customer> customer = customerRepository.findById(custId);
 		if (customer.isPresent()) {
-			return customer.get();
+			return customerRepository.getCustomerById(custId);
 		}
-		return null;
+		throw new CustomerNotFoundException("Customer Id , given by you is not found! ");
 	}
 
+	// Function to GET all customer details 
 	@Override
 	public List<Customer> getAllCustomers() {
 		return customerRepository.findAll();
 	}
-	
-}
 
+}
