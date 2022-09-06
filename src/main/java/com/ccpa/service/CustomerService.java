@@ -9,11 +9,15 @@ import com.ccpa.exception.CustomerNotUpdatedException;
 import com.ccpa.model.Customer;
 
 public interface CustomerService {
-    public Customer addCustomer(Customer customer) throws CustomerNotAddedException;
+	
+	//	All CRUD services operationfor customer
+	public Customer addCustomer(Customer customer) throws CustomerNotAddedException;
+
 	public Customer removeCustomer(Long custId) throws CustomerNotDeletedException;
-	public Customer updateCustomer(Long custId,Customer customer) throws CustomerNotUpdatedException;
+
+	public Customer updateCustomer(Long custId, Customer customer) throws CustomerNotUpdatedException;
+
 	public Customer getCustomer(Long custId) throws CustomerNotFoundException;
+
 	public List<Customer> getAllCustomers();
 }
-
-
