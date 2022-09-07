@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "transaction")
 public class Transaction {
@@ -14,6 +16,7 @@ public class Transaction {
 	@GeneratedValue
 	private Long tranId;
 	private String cardNumber;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate tranDate;
 	private String status;
 	private Double amount;
