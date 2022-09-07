@@ -24,11 +24,11 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	//Function to GET Transaction details with "transId" with required Exceptions
 	@Override
-	public Transaction getTransactionById(Long transId) throws TransactionNotFoundException {
+	public Transaction getTransactionDetails(Long transId) throws TransactionNotFoundException {
 		if(transId==null) {
-			throw new TransactionNotFoundException("transaction Id cannot be Null");
+			throw new TransactionNotFoundException("Transaction Id cannot be Null");
 		}else if(!transactionRepository.existsById(transId)) {
-			throw new TransactionNotFoundException("Transaction with Transaction Id "+transId+" Does not Exists");
+			throw new TransactionNotFoundException("This Transaction Id "+transId+" does not Exists");
 		}
 		return transactionRepository.findById(transId).orElse(null);
 	}
@@ -43,13 +43,13 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public Transaction addTranscation(Transaction transaction) throws TransactionNotAddException {
 		if (Objects.isNull(transaction))
-			throw new TransactionNotAddException("Transaction not Added!");
+			throw new TransactionNotAddException("Values cannot be null Transaction not Added");
 		return transactionRepository.save(transaction);
 	}
 
 	//Function to DELETE Transaction details with required Exceptions
 	@Override
-	public Transaction removeTransactionById(Long transId) throws TransactionNotDeletedException {
+	public Transaction removeTransaction(Long transId) throws TransactionNotDeletedException {
 		transactionRepository.deleteById(transId);
 		if(transactionRepository.existsById(transId)) {
 			throw new TransactionNotDeletedException("Error Deleting Transation");
