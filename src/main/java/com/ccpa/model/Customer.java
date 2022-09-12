@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "customer")
 public class Customer {
 
+
 	@Id
 	@GeneratedValue
 	private Long custId;
@@ -30,6 +31,7 @@ public class Customer {
 	@JoinColumn(name = "doorNo")
 	private Address address;
 
+	
 	public Customer() {
 	}
 

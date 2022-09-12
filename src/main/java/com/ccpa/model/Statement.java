@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "statement")
 public class Statement {
 
+	
 	@Id
 	@GeneratedValue
 	private Long statementId;
@@ -27,9 +28,10 @@ public class Statement {
 	private LocalDate dueDate;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "custId")
+	@JoinColumn(name="custId")
 	private Customer customer;
-
+	
+	
 	public Statement() {
 
 	}

@@ -85,5 +85,4 @@ public class StatementController {
 		res.put("data", statementService.getAllStatements());
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
-
 }
