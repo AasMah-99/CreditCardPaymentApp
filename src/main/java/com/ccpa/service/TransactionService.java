@@ -11,13 +11,13 @@ import com.ccpa.model.Transaction;
 public interface TransactionService {
 	
 	//	All CRUD services are added
-	public Transaction getTransactionById(Long transId) throws TransactionNotFoundException;
+	public Transaction getTransactionDetails(Long transId) throws TransactionNotFoundException;
 	
 	public List<Transaction> getAllTransactions();
 	
 	public Transaction addTranscation(Transaction transaction) throws TransactionNotAddException;
 	
-	public Transaction removeTransactionById(Long transId) throws TransactionNotDeletedException;
+	public Transaction removeTransaction(Long transId) throws TransactionNotDeletedException;
 
 	public Transaction updateTransaction(Long transId, Transaction transaction) throws TranscationNotUpdatedExcption;
 }

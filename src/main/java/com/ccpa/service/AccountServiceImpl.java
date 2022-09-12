@@ -22,13 +22,15 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
     AccountRepository accountRepository;
 
+	//Function to Add account with specific exceptions
 	@Override
 	public Account addAccount(Account account) throws AccountNotAddedException{
 		if (Objects.isNull(account))
 			throw new AccountNotAddedException("Account Not Found!");
 		return accountRepository.save(account);
 	}
-
+     
+	//Function to remove Account with specific Exception
 	@Override
 	public Account removeAccount(Long id) throws AccountNotDeletedException {
 		accountRepository.deleteById(id);
@@ -38,7 +40,8 @@ public class AccountServiceImpl implements AccountService {
 		
 		return null;
 	}
-
+    
+	//Function to update account with specific exception
 	@Override
 	public Account updateAccount(Long id, Account account) throws AccountNotUpdatedException {
 		if(accountRepository.existsById(id)){
@@ -50,6 +53,7 @@ public class AccountServiceImpl implements AccountService {
 		throw new AccountNotUpdatedException("error updating account");
 	}	
 
+	//Function to get account with Id
 	@Override
 	public Account getAccount(Long id) throws AccountNotFoundException {
 		
@@ -62,6 +66,7 @@ public class AccountServiceImpl implements AccountService {
 
 	}
 
+	//Function to get all accounts
 	@Override
 	public List<Account> getAllAccounts() {
 		List<Account> account = (List<Account>) accountRepository.findAll();

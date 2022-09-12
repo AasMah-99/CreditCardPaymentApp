@@ -61,7 +61,7 @@ public class CreditCardController {
 		Map<String, Object> res = new HashMap<>();
 		res.put(status, true);
 		res.put(message, "All Credit cards ");
-		res.put("data", creditCardService.getAllCreditCard());
+		res.put("data", creditCardService.getAllCreditCards());
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 
@@ -78,12 +78,12 @@ public class CreditCardController {
 
 	// Updating specific credit card informations with PUT mapping
 	@PutMapping("/updateCreditCard/{cardId}")
-	public ResponseEntity<Map<String, Object>> updateCreditCard(@RequestBody CreditCard creditcard,
+	public ResponseEntity<Map<String, Object>> updateCreditCard(@RequestBody CreditCard creditCard,
 			@PathVariable Long cardId) throws CreditCardNotUpdatedException {
 		Map<String, Object> res = new HashMap<>();
 		res.put(status, true);
 		res.put(message, "Card updated successfully!");
-		res.put("data", creditCardService.updateCreditCard(cardId, creditcard));
+		res.put("data", creditCardService.updateCreditCard(cardId, creditCard));
 		return new ResponseEntity<>(res, HttpStatus.OK);
 	}
 

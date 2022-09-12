@@ -26,7 +26,7 @@ public class LoginController {
 	public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody Map<String, Object> body) throws UserNotFoundException {
 		Map<String, Object> us = new HashMap<>();
 		us.put(status, true);
-		us.put(message, "data inserted successfully!");
+		us.put(message, "User Logged in successfully!");
 		us.put("data", userService.getUser(body.get("userId").toString(), body.get("password").toString()));
 		return new ResponseEntity<>(us, HttpStatus.OK);
 	}
