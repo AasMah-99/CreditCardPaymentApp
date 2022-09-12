@@ -20,4 +20,5 @@ public interface StatementService {
 	public Statement getStatement(Long statementId) throws StatementNotFoundException;
 
 	public List<Statement> getAllStatements();
+	
 }
