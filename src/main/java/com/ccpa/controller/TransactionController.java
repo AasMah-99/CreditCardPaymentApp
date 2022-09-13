@@ -32,23 +32,23 @@ public class TransactionController {
 	@Autowired
 	TransactionService transactionService;
 	
-	//To see all the Data of Transaction
+	//To get all the Transaction details
 	@GetMapping("/getAllTransactions")
 	public ResponseEntity<Map<String, Object>> getAllTransaction() {
 		Map<String, Object> trans = new HashMap<>();
 		trans.put(status, true);
-		trans.put(message, "All Transaction ");
+		trans.put(message, "All Transaction Details");
 		trans.put("data", transactionService.getAllTransactions());
 		return new ResponseEntity<>(trans, HttpStatus.OK);
 	}
 	
-	//To see Data of Transaction with Transaction ID
+	//To get Data of Transaction with Transaction ID
 	@GetMapping("/getTransaction/{transactionId}")
-	public ResponseEntity<Map<String, Object>> getTransactionById(@PathVariable Long transId) throws TransactionNotFoundException {
+	public ResponseEntity<Map<String, Object>> getTransactionDetails(@PathVariable("transactionId") Long transId) throws TransactionNotFoundException {
 		Map<String, Object> trans = new HashMap<>();
 		trans.put(status, true);
-		trans.put(message, "Transaction with Id!");
-		trans.put("data", transactionService.getTransactionById(transId));
+		trans.put(message, "Transaction Details with Id "+transId+"!");
+		trans.put("data", transactionService.getTransactionDetails(transId));
 		return new ResponseEntity<>(trans, HttpStatus.OK);
 	}
 	
@@ -63,8 +63,8 @@ public class TransactionController {
 	}
 
 	//To Update Data of Transaction with Transaction ID
-	@PutMapping("/updateTransaction")
-	public ResponseEntity<Map<String, Object>> updateTransaction(@RequestBody Transaction transaction, @PathVariable Long transId) throws TranscationNotUpdatedExcption{
+	@PutMapping("/updateTransaction/{transactionId}")
+	public ResponseEntity<Map<String, Object>> updateTransaction(@PathVariable("transactionId") Long transId, @RequestBody Transaction transaction) throws TranscationNotUpdatedExcption{
 		Map<String, Object> trans = new HashMap<>();
 		trans.put(status, true);
 		trans.put(message, "Transaction Updated SuccessFully");
@@ -74,11 +74,11 @@ public class TransactionController {
 	
 	//To Delete Data of Transaction with Transaction ID
 	@DeleteMapping("/deleteTransaction/{transactionId}")
-	public ResponseEntity<Map<String, Object>> deleteTransactionById(@PathVariable Long transId) throws TransactionNotDeletedException {
+	public ResponseEntity<Map<String, Object>> deleteTransaction(@PathVariable("transactionId") Long transId) throws TransactionNotDeletedException {
 		Map<String, Object> trans = new HashMap<>();
 		trans.put(status, true);
 		trans.put(message, "Transaction deleted successfully!");
-		trans.put("data", transactionService.removeTransactionById(transId));
+		trans.put("data", transactionService.removeTransaction(transId));
 		return new ResponseEntity<>(trans, HttpStatus.OK);
 	}
 	
